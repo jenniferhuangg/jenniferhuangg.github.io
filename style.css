@@ -165,15 +165,9 @@ section {
     align-items: center;
 }
 
-.main-container .image {
-    z-index: -1;
-    width: 45%;
-    margin-top: 50px; /* Add this line to move the image down */
-}
+.main-container .image { z-index: auto; }
+.main-container .image img { display:block; max-width:100%; height:auto; }
 
-.main-container .image img {
-    width: 100%;
-}
 
 .main-container .content {
     color: rgb(111, 140, 193);
