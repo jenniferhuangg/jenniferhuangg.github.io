@@ -536,15 +536,15 @@ body.exp-page .page-wrapper{
   html.exp-root-scroll{ overflow-y: auto !important; }
   body.exp-page{ overflow-y: auto !important; }
 }
-/* --- Experiences page only: keep the radial gradient fixed to the viewport --- */
+/* Alternative (mobile-safe): use a fixed pseudo-layer */
 body.exp-page{
-  /* base color behind the gradient */
-  background-color: #fff;
-
-  /* pin the gradient to the viewport so it doesn't stretch as the page scrolls */
-  background-image: radial-gradient(circle at bottom left, #d5e4ff 0, transparent 80%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;   /* key line: stops the “dragging out” */
-  background-size: 100vw 100vh;   /* keep it exactly viewport-sized */
+  background: #fff !important; /* plain base */
 }
-
+body.exp-page::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at bottom left, #d5e4ff 0, transparent 80%);
+}
