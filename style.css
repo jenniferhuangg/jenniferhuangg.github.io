@@ -506,3 +506,34 @@ body.exp-page main {
     font-weight: 600; 
 }
 .bowp { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
+
+/*extra stuff for experience scrollability*/
+html.exp-root-scroll{
+  height: auto !important;
+  overflow: visible !important;    /* clear the global 'overflow:hidden' */
+  overflow-y: auto !important;     /* enable vertical scroll */
+}
+
+body.exp-page{
+  height: auto !important;
+  min-height: 100% !important;
+  overflow: visible !important;    /* clear the global 'overflow:hidden' */
+  overflow-y: auto !important;     /* enable vertical scroll */
+  position: static !important;     /* undo any fixed/locked layouts */
+}
+
+/* make sure inner wrappers don't re-lock height */
+body.exp-page section,
+body.exp-page main,
+body.exp-page .page-wrapper{
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+/* keep it working on phones (your CSS hides body overflow in a media query) */
+@media (max-width: 884px){
+  html.exp-root-scroll{ overflow-y: auto !important; }
+  body.exp-page{ overflow-y: auto !important; }
+}
+
