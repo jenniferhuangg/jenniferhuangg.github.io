@@ -536,15 +536,18 @@ body.exp-page .page-wrapper{
   html.exp-root-scroll{ overflow-y: auto !important; }
   body.exp-page{ overflow-y: auto !important; }
 }
-/* Alternative (mobile-safe): use a fixed pseudo-layer */
-body.exp-page{
-  background: #fff !important; /* plain base */
+/* --- Experiences page only: pin gradient to the viewport --- */
+html.exp-root-scroll {
+  /* fixed, viewport-sized gradient */
+  background-image: radial-gradient(circle at bottom left, #d5e4ff 0, transparent 80%);
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-attachment: fixed;   /* key: don't stretch on scroll */
+  background-size: 100vw 100vh;   /* exactly one viewport */
+  background-position: left bottom;
 }
-body.exp-page::before{
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(circle at bottom left, #d5e4ff 0, transparent 80%);
+
+/* body content scrolls, background stays on html */
+body.exp-page {
+  background: transparent !important;  /* remove the body gradient on this page */
 }
