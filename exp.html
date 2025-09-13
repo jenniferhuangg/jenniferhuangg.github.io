@@ -1,38 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="exp-root-scroll">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jennifer Huang's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jennifer Huang's Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <!-- Page-only overrides + gallery styles (scoped to exp page) -->
+  <style>
+    /* Simple stacked gallery layout */
+    body.exp-page .stacked-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: min(900px, 92vw);
+      margin: 96px auto 72px; /* push below nav */
+      padding: 0 8px;
+    }
+
+    body.exp-page .stacked-gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+    /* Keep dropdown above content on THIS page only */
+    body.exp-page .dropdown {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      transform: translateY(-100%);
+      max-height: 100dvh;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+  </style>
 </head>
-<body>
+<body class="exp-page">
   <nav>
-        <div class="nav-container">
-            <div class="experiences">
-                <span>experiences <span class="bowe">*ੈ✩‧₊˚</span></span>
-            </div>
-            <i class="fa-solid fa-bars" onclick="hamburg()"></i>
-        </div>
-        <div class="dropdown">
-            <div class="links">
-                <a href="index.html">home</a>
-                <a href="about.html">about</a>
-                <a href="projects.html">projects</a>
-                <a href="exp.html">experiences</a>
-                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
-            </div>
-        </div>
-    </nav>
-     <script>
-        function hamburg() {
-            const navbar = document.querySelector(".dropdown")
-            navbar.style.transform = "translateY(0px)"
-        }
-        function cancel() {
-            const navbar = document.querySelector(".dropdown")
-            navbar.style.transform = "translateY(-500px)"
-        }
-    </script>
+    <div class="nav-container">
+      <div class="experiences">
+        <span>experiences <span class="bowe">*ੈ✩‧₊˚</span></span>
+      </div>
+      <i class="fa-solid fa-bars" onclick="hamburg()"></i>
+    </div>
+    <div class="dropdown">
+      <div class="links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="projects.html">projects</a>
+        <a href="exp.html">experiences</a>
+        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <main class="stacked-gallery" aria-label="Image gallery">
+    <img src="bacsa.png"  alt="Gallery image 1"  loading="lazy">
+    <img src="sdss.png"  alt="Gallery image 2"  loading="lazy">
+    <img src="blueprint.png"  alt="Gallery image 3"  loading="lazy">
+    <img src="studyverse.png"  alt="Gallery image 4"  loading="lazy">
+    <img src="wicsm.png"  alt="Gallery image 5"  loading="lazy">
+    <img src="mcia.png"  alt="Gallery image 6"  loading="lazy">
+    <img src="mciy.png"  alt="Gallery image 7"  loading="lazy">
+    <img src="cyberseniors.png"  alt="Gallery image 8"  loading="lazy">
+    <div class="hackathontitle">
+      <span>hackathons <span class="bowh">▄▀▄▀</span></span>
+    </div>
+    <img src="terrahacks.png"  alt="Gallery image 9"  loading="lazy">
+    <img src="ellehacks.png" alt="Gallery image 10" loading="lazy">
+    <img src="yrhacks.png"  alt="Gallery image 11" loading="lazy">
+  </main>
+
+  <script>
+    function hamburg(){ document.querySelector(".dropdown").style.transform = "translateY(0)"; }
+    function cancel(){  document.querySelector(".dropdown").style.transform = "translateY(-100%)"; }
+  </script>
 </body>
+</html>
