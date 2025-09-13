@@ -165,9 +165,15 @@ section {
     align-items: center;
 }
 
-.main-container .image { z-index: auto; }
-.main-container .image img { display:block; max-width:100%; height:auto; }
+.main-container .image {
+    z-index: -1;
+    width: 45%;
+    margin-top: 50px; /* Add this line to move the image down */
+}
 
+.main-container .image img {
+    width: 100%;
+}
 
 .main-container .content {
     color: rgb(111, 140, 193);
@@ -285,10 +291,11 @@ section {
 }
 
 @media (max-width: 884px) {
-    body {
-        overflow-y: visible;
+    body.exp-page 
+    { 
+        overflow-y: auto; 
     }
-    
+
     nav .logo {
         position: absolute;
         top: 16px;
@@ -442,6 +449,52 @@ section {
     font-weight: 600;
 }
 .bowe { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
+.hackathontitle
+{
+    text-align: left;
+    color: rgb(111, 140, 193);
+    font-size: 3rem;
+    margin-top: 2rem;
+    font-weight: 600;
+}
+/* experiences page only */
+body.exp-page .hackathontitle {
+  margin-left: -50px;   /* cancels the gallery's 8px left padding */
+}
+
+.bowh { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
+
+html.exp-root-scroll {
+  height: auto !important;
+  overflow-y: auto !important;   /* re-enable scroll on the root */
+}
+
+/* Add this class to the <body> tag in exp.html */
+body.exp-page {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-y: auto !important;   /* body scroll */
+  position: static !important;   /* undo any fixed layouts */
+}
+
+/* Let content expand on the experiences page */
+body.exp-page section { 
+  height: auto; 
+  min-height: 0; 
+  overflow: visible; 
+}
+body.exp-page .page-wrapper,
+body.exp-page main {
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
+}
+
+/* Keep scroll on mobile for experiences page only */
+@media (max-width: 884px) {
+  body.exp-page { overflow-y: auto !important; }
+}
+
 
 /*projects*/
 .projects
