@@ -497,57 +497,124 @@ body.exp-page main {
 
 
 /*projects*/
-.projects
-{
-    text-align: center;
-    color: rgb(111, 140, 193);
-    font-size: 3rem;
-    margin-top: 2rem;
-    font-weight: 600; 
+.projects {
+  text-align: center;
+  color: rgb(111, 140, 193);
+  font-size: 3rem;
+  margin-top: 2rem;
+  font-weight: 600;
 }
-.bowp { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
+.bowp { color: rgb(119, 123, 130); }
 
-/*extra stuff for experience scrollability*/
-html.exp-root-scroll{
+html.projects-root-scroll {
   height: auto !important;
-  overflow: visible !important;    /* clear the global 'overflow:hidden' */
-  overflow-y: auto !important;     /* enable vertical scroll */
+  overflow-y: auto !important;
 }
-
-body.exp-page{
+body.projects-page {
   height: auto !important;
   min-height: 100% !important;
-  overflow: visible !important;    /* clear the global 'overflow:hidden' */
-  overflow-y: auto !important;     /* enable vertical scroll */
-  position: static !important;     /* undo any fixed/locked layouts */
+  overflow-y: auto !important;
+  position: static !important;
+}
+body.projects-page section {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+}
+body.projects-page .page-wrapper,
+body.projects-page main {
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
+}
+@media (max-width: 884px) {
+  body.projects-page { overflow-y: auto !important; }
 }
 
-/* make sure inner wrappers don't re-lock height */
-body.exp-page section,
-body.exp-page main,
-body.exp-page .page-wrapper{
-  height: auto !important;
-  min-height: 0 !important;
-  overflow: visible !important;
+/* ===== Image-as-button with NO image zoom ===== */
+.img-btn {
+  display: block;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  /* Card lift only (not the image): */
+  transform: translateY(0);
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  outline: none;
+}
+.img-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* Keep the photo static: */
+  transform: none !important;
+  filter: none !important;
+  transition: none !important;
+}
+/* Lift the container, not the image */
+.img-btn:hover,
+.img-btn:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.18);
 }
 
-/* keep it working on phones (your CSS hides body overflow in a media query) */
-@media (max-width: 884px){
-  html.exp-root-scroll{ overflow-y: auto !important; }
-  body.exp-page{ overflow-y: auto !important; }
+/* Pill button that appears without affecting the photo */
+.img-btn .pill {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(17,24,39,.88);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .18s ease, transform .18s ease;
+  pointer-events: none; /* visual only; whole image is the link */
 }
-/* --- Experiences page only: pin gradient to the viewport --- */
-html.exp-root-scroll {
-  /* fixed, viewport-sized gradient */
-  background-image: radial-gradient(circle at bottom left, #d5e4ff 0, transparent 80%);
-  background-color: #ffffff;
-  background-repeat: no-repeat;
-  background-attachment: fixed;   /* key: don't stretch on scroll */
-  background-size: 100vw 100vh;   /* exactly one viewport */
-  background-position: left bottom;
+.img-btn:hover .pill,
+.img-btn:focus-visible .pill {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* body content scrolls, background stays on html */
-body.exp-page {
-  background: transparent !important;  /* remove the body gradient on this page */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .img-btn { transition: none; }
+  .img-btn .pill { transition: none; }
+}
+/* === Force the dropdown to overlay EVERYTHING === */
+.dropdown {
+  position: fixed !important;          /* lift it out of normal flow */
+  top: 0; left: 0; right: 0;
+  transform: translateY(-100%);        /* stays hidden until opened */
+  z-index: 99999 !important;           /* higher than any card */
+  max-height: 100dvh;
+  overflow-y: auto;
+  /* optional dimmer so it reads as an overlay */
+  backdrop-filter: brightness(40%) blur(3px);
+}
+
+/* When opened (your JS sets transform to 0) it should sit on top */
+.dropdown.open { transform: translateY(0); }
+
+/* Ensure cards don't leap above the overlay on hover */
+.img-btn,
+.img-btn * {
+  z-index: auto !important;            /* no custom z-index */
+}
+
+/* If you have any parent containers with z-index > 0, reset them too */
+.page-wrapper,
+main,
+.nav-container,
+.projects {
+  z-index: auto;
+  position: relative;                  /* keep layout sane */
 }
