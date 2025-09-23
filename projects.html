@@ -1,38 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="projects-root-scroll">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jennifer Huang's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jennifer Huang's Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+  <!-- Page-scoped layout for the gallery -->
+  <style>
+    body.projects-page .stacked-g {
+      display: flex;                    /* change to grid if you prefer */
+      flex-direction: column;
+      gap: 24px;
+      max-width: min(1000px, 92vw);
+      margin: 96px auto 72px;           /* push below nav */
+      padding: 0 8px;
+    }
+
+    /* Keep dropdown above content on THIS page only */
+    body.projects-page .dropdown {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      transform: translateY(-100%);
+      max-height: 100dvh;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+  </style>
 </head>
-<body>
-  <nav>
-        <div class="nav-container">
-            <div class="projects">
-                <span>projects <span class="bowp">⋅˚₊‧ ୨୧ ‧₊˚ ⋅</span></span>
-            </div>
-            <i class="fa-solid fa-bars" onclick="hamburg()"></i>
-        </div>
-        <div class="dropdown">
-            <div class="links">
-                <a href="index.html">home</a>
-                <a href="about.html">about</a>
-                <a href="projects.html">projects</a>
-                <a href="exp.html">experiences</a>
-                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
-            </div>
-        </div>
-    </nav>
-     <script>
-        function hamburg() {
-            const navbar = document.querySelector(".dropdown")
-            navbar.style.transform = "translateY(0px)"
-        }
-        function cancel() {
-            const navbar = document.querySelector(".dropdown")
-            navbar.style.transform = "translateY(-500px)"
-        }
-    </script>
+
+<body class="projects-page">
+    <div class="nav-container">
+      <div class="projects">
+        <span>projects <span class="bowp">⋅˚₊‧ ୨୧ ‧₊˚ ⋅</span></span>
+      </div>
+      <i class="fa-solid fa-bars" onclick="hamburg()"></i>
+    </div>
+    <div class="dropdown">
+      <div class="links">
+        <a href="index.html">home</a>
+        <a href="about.html">about</a>
+        <a href="projects.html">projects</a>
+        <a href="exp.html">experiences</a>
+        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </div>
+
+  <!-- Replace USERNAME + hrefs with your links -->
+  <main class="stacked-g" aria-label="Projects gallery">
+    <a class="img-btn no-zoom" href="https://github.com/jenniferhuangg/ConcertCloud" target="_blank" rel="noopener"
+       aria-label="Open ConcertCloud on GitHub">
+      <img src="concertcloud.png" alt="ConcertCloud project screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <a class="img-btn no-zoom" href="https://github.com/jenniferhuangg/battleshipterminal" target="_blank" rel="noopener"
+       aria-label="Open Battleship server on GitHub">
+      <img src="battleship.png" alt="Battleship server project screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <a class="img-btn no-zoom" href="https://github.com/kr1shap/wellglobe" target="_blank" rel="noopener"
+       aria-label="Open WellGlobe on GitHub">
+      <img src="wellglobe.png" alt="WellGlobe project screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <a class="img-btn no-zoom" href="https://github.com/jenniferhuangg/TetrisAssembly" target="_blank" rel="noopener"
+       aria-label="Open MIPS Tetris on GitHub">
+      <img src="tetris.png" alt="MIPS Tetris project screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <a class="img-btn no-zoom" href="https://github.com/SDSS-UofT/sdss-uoft.github.io" target="_blank" rel="noopener"
+       aria-label="Open SDSS website on GitHub">
+      <img src="sdssweb.png" alt="SDSS website screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <a class="img-btn no-zoom" href="https://github.com/jenniferhuangg/The-StudyVerse" target="_blank" rel="noopener"
+       aria-label="Open StudyVerse on GitHub">
+      <img src="studyverseweb.png" alt="StudyVerse project screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <a class="img-btn no-zoom" href="https://github.com/kr1shap/greenerthankyouthink" target="_blank" rel="noopener"
+       aria-label="Open Greener Than You Think on GitHub">
+      <img src="greenerthanyouthink.png" alt="Greener Than You Think screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+
+    <img src="promconnect.png" alt="PromConnect screenshot" loading="lazy">
+
+    <a class="img-btn no-zoom" href="https://github.com/jenniferhuangg/UNOPrototype" target="_blank" rel="noopener"
+       aria-label="Open UNO (Java) on GitHub">
+      <img src="uno.png" alt="UNO Java project screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+    <a class="img-btn no-zoom" href="https://github.com/jenniferhuangg/HotelHousekeeping" target="_blank" rel="noopener"
+       aria-label="Open Hotel Housekeeping on GitHub">
+      <img src="hotelhousekeep.png" alt="Hotel Housekeeping screenshot" loading="lazy">
+      <span class="pill">View on GitHub</span>
+    </a>
+  </main>
+
+  <script>
+    function hamburg(){ document.querySelector(".dropdown").style.transform = "translateY(0)"; }
+    function cancel(){  document.querySelector(".dropdown").style.transform = "translateY(-100%)"; }
+  </script>
 </body>
+</html>
