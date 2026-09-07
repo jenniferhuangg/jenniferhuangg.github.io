@@ -1,488 +1,464 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;800&display=swap");
+:root {
+  --bg-main: #9fbdf0;
+  --bg-light: #b6cdf4;
+  --cream: #fff7cf;
+  --cream-soft: #fff3c4;
+  --cream-muted: rgba(255, 247, 207, 0.72);
+  --menu-blue: rgba(95, 120, 170, 0.92);
+}
 
 * {
-    padding: 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 html {
-    overflow-x: hidden;
+  overflow-x: hidden;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-  height: 100vh;
   margin: 0;
-  background: radial-gradient(
-    circle at bottom left,  /* start circle from bottom-right */
-    #d5e4ff 0,              /* solid color at the corner */
-    transparent 80%          /* fade out */
-  );
-}
-/* Bigger, lighter-weight subheading line */
-.content .subheading {
-  font-size: clamp(1.2rem, 1rem + 2vw, 2.2rem);
-  font-weight: 600;                /* less bold than 600/700 */
-  color: rgb(115, 145, 199);
-  line-height: 1.25;
+  background:
+    radial-gradient(circle at bottom left, var(--bg-light) 0%, transparent 75%),
+    var(--bg-main);
+  color: var(--cream);
 }
 
-
-.content h1 {
-    font-size: clamp(1rem, 2rem + 5vw, 3rem);
-    font-weight: 700;
-    color: rgb(66, 84, 117); /* darker blue */
-}
-/* Main heading */
-.content h1 {
-    font-size: clamp(1rem, 2rem + 5vw, 3rem);
-    font-weight: 600;
-    color: rgb(111, 140, 193); /* darker blue */
-}
-
-/* Highlight span inside heading */
-.content h1 span {
-    color: rgb(111, 140, 193); /* lighter blue */
-}
-/* Subheading */
-.content p {
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
-    margin: 10px 0;
-    color: rgb(111, 140, 193); /* lighter blue */
-}
-
-/* Italic text */
-.content p em, 
-.content p i {
-    color: rgb(97, 97, 97); /* gray */
-    font-style: italic;
-}
-
+/* =========================
+   NAVIGATION
+   ========================= */
 
 nav {
-    width: 100%;
-    height: 10vh;
-    position: sticky;
+  width: 100%;
+  height: 10vh;
+  position: sticky;
+  background: transparent;
 }
 
 .nav-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  z-index: auto;
 }
 
 .logo {
-    color: rgb(111, 140, 193);
-    font-size: 2rem;
-    font-weight: 600;
+  color: var(--cream);
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 2px;
 }
 
-.logo span {
-    color: rgb(111, 140, 193);
+.logo span,
+.logo .bow {
+  color: var(--cream);
 }
 
-.hamburg, .cancel {
-    cursor: pointer;
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    color: rgb(111, 140, 193);
-    display: none;
+.hamburg,
+.cancel {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: var(--cream);
+  display: none;
 }
 
 .nav-container .links {
-    display: flex;
-    gap: 3rem;
-    align-items: center;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
 }
 
 .nav-container .links a {
-    position: relative;
-    font-size: 1.2rem;
-    color: rgb(111, 140, 193);
-    text-decoration: none;
-    transition: 0.3s linear;
+  position: relative;
+  font-size: 1.2rem;
+  color: var(--cream);
+  font-weight: 400;
+  text-decoration: none;
+  transition: 0.3s linear;
 }
 
 .nav-container .links a::before {
-    position: absolute;
-    content: "";
-    bottom: -3px;
-    left: 0;
-    width: 0%;
-    height: 3px;
-    background-color: rgb(111, 140, 193);
-    transition: 0.2s linear;
+  position: absolute;
+  content: "";
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--cream);
+  transition: 0.2s linear;
 }
 
 .nav-container .links a:hover::before {
-    width: 100%;
+  width: 100%;
 }
 
 .nav-container .links a:hover {
-    color: rgb(111, 140, 193); 
+  color: white;
 }
 
+/* Mobile dropdown */
 .dropdown {
-    z-index: 100;
-    position: absolute;
-    top: 0;
-    transform: translateY(-500px);
-    width: 100%;
-    height: auto;
-    backdrop-filter: brightness(40%) blur(3px);
-    box-shadow: 0 0 20px black;
-    transition: 0.2s linear;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: auto;
+  max-height: 100dvh;
+  overflow-y: auto;
+  transform: translateY(-100%);
+  z-index: 99999 !important;
+  background: var(--menu-blue);
+  backdrop-filter: brightness(40%) blur(3px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: 0.2s linear;
+}
+
+.dropdown.open {
+  transform: translateY(0);
 }
 
 .dropdown .links a {
-    color: white;
-    display: flex;
-    text-decoration: none;
-    justify-content: center;
-    padding: 15px 0;
-    align-items: center;
-    transition: 0.2s linear;
+  color: var(--cream);
+  display: flex;
+  text-decoration: none;
+  justify-content: center;
+  padding: 15px 0;
+  align-items: center;
+  transition: 0.2s linear;
 }
 
 .dropdown .links a:hover {
-    background-color: rgb(111, 140, 193);
+  background-color: rgba(255, 247, 207, 0.12);
 }
 
+/* =========================
+   HOME PAGE
+   ========================= */
+
 section {
-    width: 100%;
-    height: 90vh;
+  width: 100%;
+  height: calc(100vh - 10vh);
+  overflow: hidden;
 }
 
 .main-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.main-container .image {
-    z-index: -1;
-    width: 45%;
-    margin-top: 50px; /* Add this line to move the image down */
-}
-
-.main-container .image img {
-    width: 100%;
-}
-
-.main-container .content {
-    color: rgb(111, 140, 193);
-    width: 50%;
-    min-height: 100px;
-}
-
-.content h1 {
-    font-size: clamp(1rem, 2rem + 5vw, 3rem);
-}
-
-.content h1 span {
-    color: rgb(101, 101, 158);
-}
-
-.content .typewriter {
-    font-weight: 300;
-    font-size: clamp(0.8rem, 2vw, 1.8rem);
-}
-
-.content .typewriter span {
-    color: rgb(110, 110, 110);
-    font-size: 2rem;
-    position: relative;
-    transition: 0.3s linear;
-    font-style: italic;
-}
-
-.typewriter span::before {
-    content: "a Computer Science Student - Software Engineering Specialist";
-    animation: words 15s infinite;
-}
-
-.typewriter span::after {
-    content: "";
-    position: absolute;
-    width: calc(100% + 8px);
-    height: 1.2em;
-    border-left: 3px solid black;
-    animation: cursor 0.6s linear infinite;
-}
-
-@keyframes cursor {
-    to {
-        border-left: 4px solid #727272;
-    }
-}
-
-@keyframes words {
-    0%, 33% {
-        content: "Computer Science student at UofT";
-    }
-    34%, 66% {
-        content: "Previously Software Engineer Intern at Scotiabank";
-    }
-    67%, 100% {
-        content: "Looking for Fall 2026 Internships";
-    }
-}
-
-.content p {
-    font-size: clamp(0.4rem, 0.2rem + 9vw, 1rem);
-    margin: 10px 0;
-}
-
-.social-links i {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 3rem;
-    height: 3rem;
-    background-color: transparent;
-    border: 0.2rem solid rgb(93, 119, 168);
-    border-radius: 50%;
-    color: rgb(93, 119, 168);
-    margin: 5px 10px;
-    font-size: 1.5rem;
-    transition: 0.2s linear;
-}
-
-.social-links {
-    margin: 15px 0 30px 0; /* Moves LinkedIn logo down (40px top margin) */
-    display: flex;
-    gap: 15px;
-}
-
-.social-links i:hover {
-    transform: scale(1.3);
-    color: white;
-    background-color: rgb(93, 119, 168);
-    filter: drop-shadow(0 0 10px rgb(93, 119, 168));
-}
-
-.content button {
-    width: 40%;
-    height: 6vh;
-    margin: 30px;
-    background-color: rgb(93, 119, 168);
-    color: white;
-    border: none;
-    outline: none;
-    font-size: 100%;
-    font-weight: 700;
-    border-radius: 5px;
-    transition: 0.2s linear;
-}
-
-.content button:hover {
-    transform: scale(1.1);
-    color: rgb(111, 140, 193);
-    border: 2px solid rgb(111, 140, 193);
-    background-color: transparent;
-    font-weight: 700;
-    box-shadow: 0 0 50px rgb(86, 112, 158);
-}
-
-@media (max-width: 884px) {
-    body.exp-page 
-    { 
-        overflow-y: auto; 
-    }
-
-    nav .logo {
-        position: absolute;
-        top: 16px;
-        left: 15px;
-        font-size: 1.5rem;
-    }
-    
-    .main-container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .nav-container .links {
-        display: none;
-    }
-    
-    .hamburg, .cancel {
-        display: block;
-    }
-    
-    .main-container .content {
-        width: 80%;
-    }
-    
-    .social-links i {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1.5rem;
-    }
-    
-    .cancel {
-        color: white;
-    }
-    
-    .main-container .image {
-        width: 40%;
-        max-width: 500px;
-        margin-top: 50px; /* Moves photo down */
-    }
-    
-}
-/* Stop generic span colors inside H1 from overriding your custom classes */
-.content h1 span { color: inherit; }
-
-/* Decorative colors */
-.logo .bow { color: rgb(190, 204, 228); }  /* matches your logo bow */
-.bows { color: rgb(190, 204, 228); }       /* keep alias if you use .bows elsewhere */
-.content h1 .stars { color: rgb(190, 204, 228); }
-
-/* Make the gray typewriter line bolder */
-.content .typewriter span {
-  color: rgb(110, 110, 110);
-  font-weight: 600;  /* bolder */
-}
-
-/* 1) No page scrolling */
-html, body {
+  width: 100%;
   height: 100%;
-  overflow: hidden;           /* hides the scrollbar */
-}
-
-/* 2) Make the section exactly the viewport minus the nav (nav is 10vh) */
-section {
-  height: calc(100vh - 10vh); /* = 90vh */
-  overflow: hidden;           /* clip any child overflow */
-}
-
-/* 3) Remove vertical overflow sources */
-.main-container .image {
-  margin-top: 0;              /* this 50px was causing overflow */
-}
-
-/* Use small padding instead of big margins to avoid overflow */
-.main-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   padding-top: 8px;
 }
 
-/* (Optional) If you also want NO scroll on mobile, override this */
-@media (max-width: 884px) {
-  body { overflow: hidden; }   /* your CSS had 'visible' here */
+/* Home cutout photo
+   - width/max-width control overall photo size
+   - translateY controls how far down the photo sits */
+.main-container .image {
+  width: 70%;
+  max-width: 600px;
+  transform: translateY(200px);
 }
 
-/*about me*/
-.aboutme
-{
-    text-align: left;
-    color: rgb(111, 140, 193);
-    font-size: 3rem;
-    margin-top: 2rem;
-    font-weight: 600;
+.main-container .image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 120vh;
+  object-fit: contain;
 }
-.bowa { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
-/* About section layout: text + image side-by-side */
+
+.main-container .content {
+  color: var(--cream);
+  width: 50%;
+  min-height: 100px;
+}
+
+/* MAIN PAGE TEXT SIZES
+   Change these three blocks if you want to resize the homepage text. */
+
+/* "Welcome!" */
+.content h1 {
+  font-size: clamp(3rem, 4.6vw, 4.6rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: 2px;
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+
+.content h1 span {
+  color: inherit;
+}
+
+/* "I'm Jennifer!" */
+.content .home-name {
+  font-size: clamp(2.1rem, 3vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.content .home-name span {
+  color: inherit;
+}
+
+.content .subheading {
+  font-size: clamp(1.2rem, 1rem + 2vw, 2.2rem);
+  font-weight: 400;
+  color: var(--cream-soft);
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+}
+
+.content p {
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
+  margin: 10px 0;
+  color: var(--cream-soft);
+  font-weight: 400;
+}
+
+.content p em,
+.content p i {
+  color: var(--cream-soft);
+  font-style: italic;
+}
+
+.content .typewriter,
+.content .home-typewriter {
+  font-weight: 350;
+  font-size: clamp(1.1rem, 1.75vw, 1.75rem);
+  color: var(--cream-soft);
+  margin-bottom: 6px;
+}
+
+/* Typewriter text inherits the size above */
+.content .typewriter span,
+.content .home-typewriter span {
+  color: var(--cream-soft);
+  font-size: inherit;
+  position: relative;
+  transition: 0.3s linear;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.typewriter span::before {
+  content: "a Computer Science Student - Software Engineering Specialist";
+  animation: words 15s infinite;
+}
+
+.typewriter span::after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 8px);
+  height: 1.2em;
+  border-left: 2px solid var(--cream);
+  animation: cursor 0.6s linear infinite;
+}
+
+@keyframes cursor {
+  to {
+    border-left-color: rgba(255, 247, 207, 0.25);
+  }
+}
+
+@keyframes words {
+  0%, 20% {
+    content: "Computer Science student at UofT";
+  }
+  21%, 40% {
+    content: "Previously Software Engineer Intern at Scotiabank";
+  }
+  41%, 60% {
+    content: "Passionate about cybersecurity, mobile and cloud development";
+  }
+  61%, 80% {
+    content: "Incoming Cloud/DevOps Intern at TD Bank";
+  }
+  81%, 100% {
+    content: "Looking for 2027 Internships";
+  }
+}
+
+/* Decorative characters */
+.bow,
+.bows,
+.bowa,
+.bowe,
+.bowh,
+.bowp,
+.stars,
+.content h1 .stars {
+  color: var(--cream-muted) !important;
+}
+
+/* Social icons */
+.social-links {
+  margin: 15px 0 30px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.social-links i {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: transparent;
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+  color: var(--cream);
+  margin: 5px 10px;
+  font-size: 1.5rem;
+  transition: 0.2s linear;
+}
+
+.social-links i:hover {
+  transform: scale(1.15);
+  color: var(--bg-main);
+  background-color: var(--cream);
+  filter: drop-shadow(0 0 10px rgba(255, 247, 207, 0.35));
+}
+
+.content button {
+  width: 40%;
+  height: 6vh;
+  margin: 30px;
+  background-color: var(--cream);
+  color: #7896c9;
+  border: 2px solid var(--cream);
+  outline: none;
+  font-size: 100%;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: 0.2s linear;
+}
+
+.content button:hover {
+  transform: translateY(-3px);
+  color: var(--cream);
+  border: 2px solid var(--cream);
+  background-color: transparent;
+  box-shadow: 0 0 35px rgba(255, 247, 207, 0.25);
+}
+
+/* =========================
+   ABOUT ME
+   ========================= */
+
+.aboutme {
+  text-align: left;
+  color: var(--cream);
+  font-size: 3rem;
+  margin-top: 2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
 .about {
-  padding: 1.5rem 1rem;                /* space around the row */
+  padding: 1.5rem 1rem;
 }
 
-/* Flip order: image first, then text; make everything a bit larger */
 .aboutme-row {
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  flex-direction: row-reverse;      /* <-- puts the image on the left */
+  flex-direction: row-reverse;
   max-width: 1200px;
   margin: 0 auto;
   padding: 1.5rem 1rem;
 }
 
-/* Bigger text */
 .aboutmecontent {
   flex: 1 1 58%;
   font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.35rem);
   line-height: 1.75;
-  color: rgb(80, 100, 136);
+  color: var(--cream-soft);
+  font-weight: 400;
 }
 
-/* Bigger image column (responsive) */
+/* About Me photo
+   Change max-width / max-height here if you want it larger or smaller. */
 .amimage {
-  flex: 0 0 clamp(280px, 34vw, 460px);
+  flex: 0 0 clamp(500px, 60vw, 500px);
 }
 
 .amimage img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 12px; /* optional */
+  max-height: 75vh;
+  object-fit: contain;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  background: transparent;
 }
 
-/* Mobile: stack vertically, keep image first */
-@media (max-width: 800px) {
-  .aboutme-row { 
-    flex-direction: column;         /* stack */
-  }
-  .amimage { 
-    width: min(78vw, 460px); 
-  }
-  .aboutmecontent {
-    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
-    line-height: 1.65;
-  }
+/* =========================
+   EXPERIENCES
+   ========================= */
+
+.experiences {
+  text-align: center;
+  color: var(--cream);
+  font-size: 3rem;
+  margin-top: 2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
 }
 
+.hackathontitle {
+  text-align: left;
+  color: var(--cream);
+  font-size: 3rem;
+  margin-top: 2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
 
-/*expereiences*/
-.experiences
-{
-    text-align: center;
-    color: rgb(111, 140, 193);
-    font-size: 3rem;
-    margin-top: 2rem;
-    font-weight: 600;
-}
-.bowe { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
-.hackathontitle
-{
-    text-align: left;
-    color: rgb(111, 140, 193);
-    font-size: 3rem;
-    margin-top: 2rem;
-    font-weight: 600;
-}
-/* experiences page only */
 body.exp-page .hackathontitle {
-  margin-left: -50px;   /* cancels the gallery's 8px left padding */
+  margin-left: -50px;
 }
-
-.bowh { color: rgb(119, 123, 130); }       /* keep alias if you use .bows elsewhere */
 
 html.exp-root-scroll {
   height: auto !important;
-  overflow-y: auto !important;   /* re-enable scroll on the root */
+  overflow-y: auto !important;
 }
 
-/* Add this class to the <body> tag in exp.html */
 body.exp-page {
   height: auto !important;
   min-height: 100% !important;
-  overflow-y: auto !important;   /* body scroll */
-  position: static !important;   /* undo any fixed layouts */
+  overflow-y: auto !important;
+  position: static !important;
 }
 
-/* Let content expand on the experiences page */
-body.exp-page section { 
-  height: auto; 
-  min-height: 0; 
-  overflow: visible; 
+body.exp-page section {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
 }
+
 body.exp-page .page-wrapper,
 body.exp-page main {
   height: auto;
@@ -490,131 +466,412 @@ body.exp-page main {
   overflow: visible;
 }
 
-/* Keep scroll on mobile for experiences page only */
-@media (max-width: 884px) {
-  body.exp-page { overflow-y: auto !important; }
-}
+/* =========================
+   PROJECTS
+   ========================= */
 
-
-/*projects*/
 .projects {
   text-align: center;
-  color: rgb(111, 140, 193);
+  color: var(--cream);
   font-size: 3rem;
   margin-top: 2rem;
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: auto;
 }
-.bowp { color: rgb(119, 123, 130); }
 
 html.projects-root-scroll {
   height: auto !important;
   overflow-y: auto !important;
 }
+
 body.projects-page {
   height: auto !important;
   min-height: 100% !important;
   overflow-y: auto !important;
   position: static !important;
 }
+
 body.projects-page section {
   height: auto;
   min-height: 0;
   overflow: visible;
 }
+
 body.projects-page .page-wrapper,
 body.projects-page main {
   height: auto;
   min-height: 100%;
   overflow: visible;
 }
-@media (max-width: 884px) {
-  body.projects-page { overflow-y: auto !important; }
-}
 
-/* ===== Image-as-button with NO image zoom ===== */
+/* Project image buttons */
 .img-btn {
   display: block;
   position: relative;
   border-radius: 14px;
   overflow: hidden;
   text-decoration: none;
-  /* Card lift only (not the image): */
   transform: translateY(0);
-  transition: transform .18s ease, box-shadow .18s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   outline: none;
+  z-index: auto !important;
 }
+
 .img-btn img {
   width: 100%;
   height: auto;
   display: block;
   object-fit: cover;
-  /* Keep the photo static: */
   transform: none !important;
   filter: none !important;
   transition: none !important;
+  z-index: auto !important;
 }
-/* Lift the container, not the image */
+
 .img-btn:hover,
 .img-btn:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 12px 26px rgba(0,0,0,.18);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
 }
 
-/* Pill button that appears without affecting the photo */
 .img-btn .pill {
   position: absolute;
   right: 12px;
   bottom: 12px;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(17,24,39,.88);
-  color: #fff;
+  background: rgba(255, 247, 207, 0.92);
+  color: #7896c9;
   font-weight: 600;
   font-size: 13px;
   line-height: 1;
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity .18s ease, transform .18s ease;
-  pointer-events: none; /* visual only; whole image is the link */
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
 }
+
 .img-btn:hover .pill,
 .img-btn:focus-visible .pill {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .img-btn { transition: none; }
-  .img-btn .pill { transition: none; }
-}
-/* === Force the dropdown to overlay EVERYTHING === */
-.dropdown {
-  position: fixed !important;          /* lift it out of normal flow */
-  top: 0; left: 0; right: 0;
-  transform: translateY(-100%);        /* stays hidden until opened */
-  z-index: 99999 !important;           /* higher than any card */
-  max-height: 100dvh;
-  overflow-y: auto;
-  /* optional dimmer so it reads as an overlay */
-  backdrop-filter: brightness(40%) blur(3px);
-}
-
-/* When opened (your JS sets transform to 0) it should sit on top */
-.dropdown.open { transform: translateY(0); }
-
-/* Ensure cards don't leap above the overlay on hover */
-.img-btn,
-.img-btn * {
-  z-index: auto !important;            /* no custom z-index */
-}
-
-/* If you have any parent containers with z-index > 0, reset them too */
 .page-wrapper,
-main,
-.nav-container,
-.projects {
+main {
   z-index: auto;
-  position: relative;                  /* keep layout sane */
+  position: relative;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 884px) {
+  body {
+    overflow: hidden;
+  }
+
+  body.exp-page,
+  body.projects-page {
+    overflow-y: auto !important;
+  }
+
+  nav .logo {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    font-size: 1.5rem;
+  }
+
+  .nav-container .links {
+    display: none;
+  }
+
+  .hamburg,
+  .cancel {
+    display: block;
+  }
+
+  .main-container {
+    flex-direction: column;
+  }
+
+  .main-container .content {
+    width: 80%;
+  }
+
+  .main-container .image {
+    width: 52%;
+    max-width: 320px;
+    transform: translateY(24px);
+  }
+
+  .social-links i {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+  }
+
+  .cancel {
+    color: white;
+  }
+}
+
+@media (max-width: 800px) {
+  .aboutme-row {
+    flex-direction: column;
+  }
+
+  .amimage {
+    width: min(65vw, 300px);
+    flex-basis: auto;
+  }
+
+  .aboutmecontent {
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+    line-height: 1.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-btn,
+  .img-btn .pill {
+    transition: none;
+  }
+}
+
+@media (max-width: 884px) {
+
+  html {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  body.home-page {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body.home-page nav {
+    height: 72px;
+    position: relative;
+  }
+
+  body.home-page .nav-container {
+    height: 72px;
+    width: 100%;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  body.home-page nav .logo {
+    position: static;
+
+    font-size: 1.35rem;
+    font-weight: 200;
+
+    white-space: nowrap;
+  }
+
+  body.home-page .nav-container > .links {
+    display: none;
+  }
+
+  body.home-page .hamburg {
+    display: block;
+
+    position: static;
+
+    font-size: 1.5rem;
+
+    color: var(--cream);
+
+    cursor: pointer;
+
+    z-index: 10;
+  }
+
+  body.home-page .dropdown {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    transform: translateY(-100%);
+
+    z-index: 99999;
+
+    background: rgba(95, 120, 170, 0.95);
+
+    backdrop-filter: blur(10px);
+
+    transition: transform 0.25s ease;
+  }
+
+
+  body.home-page .dropdown .links {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+
+  body.home-page .dropdown .links a {
+    width: 100%;
+
+    padding: 18px 0;
+
+    text-align: center;
+
+    color: var(--cream);
+
+    text-decoration: none;
+  }
+
+
+  body.home-page .cancel {
+    display: block;
+
+    position: absolute;
+
+    top: 15px;
+    right: 20px;
+
+    color: var(--cream);
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+  }
+
+  body.home-page .home-section {
+    height: auto;
+    min-height: calc(100vh - 72px);
+
+    overflow: visible;
+
+    padding-bottom: 40px;
+  }
+
+
+  body.home-page .main-container {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 20px 24px 40px;
+  }
+
+  body.home-page .main-container .image {
+    order: 1;
+
+    width: min(70vw, 330px);
+    max-width: 330px;
+
+    margin: 0 auto;
+
+    transform: none;
+  }
+
+
+  body.home-page .main-container .image img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-height: none;
+
+    object-fit: contain;
+  }
+
+  body.home-page .main-container .content {
+    order: 2;
+
+    width: 100%;
+    max-width: 600px;
+
+    min-height: 0;
+
+    margin-top: 10px;
+
+    text-align: center;
+  }
+
+  body.home-page .content > h1:first-of-type {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
+
+    line-height: 1.1;
+
+    margin-bottom: 12px;
+  }
+
+  body.home-page .content .home-name {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+
+    line-height: 1.15;
+
+    margin-bottom: 14px;
+  }
+
+  body.home-page .content .home-typewriter {
+    width: 100%;
+
+    font-size: clamp(1rem, 4.7vw, 1.4rem);
+
+    line-height: 1.4;
+
+    margin-bottom: 16px;
+  }
+
+
+  body.home-page .content .home-typewriter span {
+    font-size: inherit;
+  }
+
+  body.home-page .social-links {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 14px 0 0;
+  }
+
+
+  body.home-page .social-links i {
+    width: 2.7rem;
+    height: 2.7rem;
+
+    margin: 0;
+
+    font-size: 1.3rem;
+  }
+
+  body.home-page .stars {
+    display: inline;
+
+    white-space: normal;
+  }
+
 }
