@@ -1,84 +1,566 @@
 <!DOCTYPE html>
 <html lang="en" class="exp-root-scroll">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jennifer Huang's Portfolio</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
-  <!-- Page-only overrides + gallery styles (scoped to exp page) -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Jennifer Huang's Portfolio</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+
   <style>
-    /* Simple stacked gallery layout */
+
     body.exp-page .stacked-gallery {
       display: flex;
       flex-direction: column;
+
       gap: 24px;
+
       max-width: min(900px, 92vw);
-      margin: 96px auto 72px; /* push below nav */
+
+      margin: 96px auto 72px;
+
       padding: 0 8px;
     }
 
-    body.exp-page .stacked-gallery img {
+    .exp-card {
+      display: block;
+
+      width: 100%;
+
+      padding: 0;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      cursor: pointer;
+
+      perspective: 1500px;
+
+      font-family: inherit;
+    }
+
+    .exp-card-inner {
+      display: grid;
+
+      width: 100%;
+
+      transform-style: preserve-3d;
+
+      transition: transform 0.65s ease;
+    }
+
+    .exp-card.flipped .exp-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .exp-card-front,
+    .exp-card-back {
+      grid-area: 1 / 1;
+
       width: 100%;
       height: auto;
+
       display: block;
+
       object-fit: contain;
+
+      border-radius: 12px;
+
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .exp-card-front {
+      transform: rotateY(0deg);
+    }
+
+    .exp-card-back {
+      transform: rotateY(180deg);
+    }
+
+    .exp-card:hover {
+      filter: brightness(1.03);
+    }
+
+    .exp-card.flipped .exp-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .exp-card:focus-visible {
+      outline: 2px solid #fff7cf;
+
+      outline-offset: 5px;
+
       border-radius: 12px;
     }
 
-    /* Keep dropdown above content on THIS page only */
+
     body.exp-page .dropdown {
       position: fixed;
-      top: 0; left: 0; right: 0;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
       transform: translateY(-100%);
+
       max-height: 100dvh;
+
       overflow-y: auto;
+
       z-index: 1000;
     }
+
+    @media (max-width: 700px) {
+
+      body.exp-page .stacked-gallery {
+        width: 92%;
+
+        margin-top: 70px;
+      }
+
+    }
+
   </style>
+
 </head>
+
+
 <body class="exp-page">
-    <div class="nav-container">
-      <div class="experiences">
-        <span>experiences <span class="bowe">*ੈ✩‧₊˚</span></span>
-      </div>
-      <i class="fa-solid fa-bars" onclick="hamburg()"></i>
-    </div>
-    <div class="dropdown">
-      <div class="links">
-        <a href="index.html">home</a>
-        <a href="about.html">about</a>
-        <a href="projects.html">projects</a>
-        <a href="exp.html">experiences</a>
-        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
-      </div>
+
+  <div class="nav-container">
+
+    <div class="experiences">
+
+      <span>
+        experiences
+
+        <span class="bowe">
+          *ੈ✩‧₊˚
+        </span>
+      </span>
+
     </div>
 
-  <main class="stacked-gallery" aria-label="Image gallery">
-    <img src="scotiabank.png"  alt="Gallery image 10"  loading="lazy">
-    <img src="wicsmwebdev.png"  alt="Gallery image 9"  loading="lazy">
-    <img src="gdg.png"  alt="Gallery image 0"  loading="lazy">
-    <img src="bacsa.png"  alt="Gallery image 1"  loading="lazy">
-    <img src="sdss.png"  alt="Gallery image 2"  loading="lazy">
-    <img src="blueprint.png"  alt="Gallery image 3"  loading="lazy">
-    <img src="studyverse.png"  alt="Gallery image 4"  loading="lazy">
-    <img src="wicsm.png"  alt="Gallery image 5"  loading="lazy">
-    <img src="mcia.png"  alt="Gallery image 6"  loading="lazy">
-    <img src="mciy.png"  alt="Gallery image 7"  loading="lazy">
-    <img src="cyberseniors.png"  alt="Gallery image 8"  loading="lazy">
-    <div class="hackathontitle">
-      <span>hackathons <span class="bowh">▄▀▄▀</span></span>
+
+    <i
+      class="fa-solid fa-bars"
+      onclick="hamburg()"
+    ></i>
+
+  </div>
+
+  <div class="dropdown">
+
+    <div class="links">
+
+      <a href="index.html">
+        home
+      </a>
+
+      <a href="about.html">
+        about
+      </a>
+
+      <a href="projects.html">
+        projects
+      </a>
+
+      <a href="exp.html">
+        experiences
+      </a>
+
+
+      <i
+        class="fa-solid fa-xmark cancel"
+        onclick="cancel()"
+      ></i>
+
     </div>
-    <img src="htv.png"  alt="Gallery image 12"  loading="lazy">
-    <img src="terrahacks.png"  alt="Gallery image 9"  loading="lazy">
-    <img src="ellehacks.png" alt="Gallery image 10" loading="lazy">
-    <img src="yrhacks.png"  alt="Gallery image 11" loading="lazy">
+
+  </div>
+
+  <main
+    class="stacked-gallery"
+    aria-label="Experiences gallery"
+  >
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip TD experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/td.png"
+          alt="TD experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/tdback.png"
+          alt="TD skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip Blueprint developer experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/blueprintdev.png"
+          alt="Blueprint developer experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/blueprintdevback.png"
+          alt="Blueprint developer skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip Clearance Central experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/clearancecentral.png"
+          alt="Clearance Central experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/clearancecentralback.png"
+          alt="Clearance Central skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip Scotiabank experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/scotiabank.png"
+          alt="Scotiabank experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/scotiabankback.png"
+          alt="Scotiabank skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip WiCSM web developer experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/wicsmdev.png"
+          alt="WiCSM web developer experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/wicsmdevback.png"
+          alt="WiCSM web developer skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip GDG experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/gdg.png"
+          alt="GDG experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/gdgback.png"
+          alt="GDG skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip BACSA experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/bacsa.png"
+          alt="BACSA experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/bacsaback.png"
+          alt="BACSA skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip SDSS experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/sdss.png"
+          alt="SDSS experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/sdssback.png"
+          alt="SDSS skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip Blueprint experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/blueprint.png"
+          alt="Blueprint experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/blueprintback.png"
+          alt="Blueprint skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip StudyVerse experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/studyverse.png"
+          alt="StudyVerse experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/studyverseback.png"
+          alt="StudyVerse skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip WiCSM experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/wicsm.png"
+          alt="WiCSM experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/wicsmback.png"
+          alt="WiCSM skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
+
+    <button
+      class="exp-card"
+      type="button"
+      aria-label="Flip Cyber Seniors experience card"
+      aria-pressed="false"
+    >
+
+      <div class="exp-card-inner">
+
+        <img
+          class="exp-card-front"
+          src="experience/cyberseniors.png"
+          alt="Cyber Seniors experience"
+          loading="lazy"
+        />
+
+        <img
+          class="exp-card-back"
+          src="experience/cyberseniorsback.png"
+          alt="Cyber Seniors skills and experience details"
+          loading="lazy"
+        />
+
+      </div>
+
+    </button>
   </main>
 
   <script>
-    function hamburg(){ document.querySelector(".dropdown").style.transform = "translateY(0)"; }
-    function cancel(){  document.querySelector(".dropdown").style.transform = "translateY(-100%)"; }
+
+    function hamburg() {
+
+      document
+        .querySelector(".dropdown")
+        .style
+        .transform = "translateY(0)";
+
+    }
+
+
+    function cancel() {
+
+      document
+        .querySelector(".dropdown")
+        .style
+        .transform = "translateY(-100%)";
+
+    }
+
+    const experienceCards = document.querySelectorAll(".exp-card");
+    experienceCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+        const isFlipped = card.classList.contains("flipped");
+        card.setAttribute(
+          "aria-pressed",
+          isFlipped.toString()
+        );
+
+      });
+
+    });
+
   </script>
 </body>
 </html>
